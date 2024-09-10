@@ -65,6 +65,11 @@
             class="form-control shadow-sm"
             id="dateOfBirth"
             formControlName="dateOfBirth"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('dateOfBirth')?.invalid &&
+                userForm.get('dateOfBirth')?.touched
+            }"
           />
           <div
             *ngIf="
@@ -73,7 +78,7 @@
             "
             class="invalid-feedback"
           >
-            La fecha de nacimiento es obligatoria.
+            {{ dateOfBirthErrorMessage }}
           </div>
         </div>
       </div>
@@ -145,6 +150,7 @@
             id="area"
             formControlName="area"
             placeholder="Introduce el área"
+            maxlength="2"
             pattern="\d{2}"
             [ngClass]="{
               'is-invalid':
@@ -157,7 +163,7 @@
             "
             class="invalid-feedback"
           >
-            El área debe ser un número entre 10 y 99.
+            {{ areaErrorMessage }}
           </div>
         </div>
       </div>
@@ -171,7 +177,9 @@
             id="salary"
             formControlName="salary"
             placeholder="Introduce el salario"
-            pattern="^\d+(\.\d{2})?$"
+            (input)="formatSalary($event)"
+            maxlength="10"
+            pattern="^\d{1,7}(\.\d{1,2})?$"
             [ngClass]="{
               'is-invalid':
                 userForm.get('salary')?.invalid &&
@@ -184,7 +192,7 @@
             "
             class="invalid-feedback"
           >
-            El salario debe ser un número decimal válido con dos decimales.
+            {{ salaryErrorMessage }}
           </div>
         </div>
       </div>

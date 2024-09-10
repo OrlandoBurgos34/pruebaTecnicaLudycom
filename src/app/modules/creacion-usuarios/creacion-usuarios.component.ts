@@ -49,7 +49,7 @@ export class CreacionUsuariosComponent implements OnInit {
       ],
       salary: [
         null,
-        [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)],
+        [Validators.required, Validators.pattern(/^\d{1,7}(\.\d{1,2})?$/)],
       ],
       status: ['Activo', Validators.required],
     });
@@ -105,6 +105,16 @@ export class CreacionUsuariosComponent implements OnInit {
     return null;
   }
 
+  formatSalary(event: any): void {
+    let input = event.target.value.replace(/\D/g, '');
+    if (input) {
+      input = parseFloat(input).toString();
+      const formattedInput = (parseInt(input, 10) / 100).toFixed(2);
+      event.target.value = formattedInput;
+      this.userForm.get('salary')?.setValue(formattedInput);
+    }
+  }
+
   get areaErrorMessage(): string | null {
     const areaControl = this.userForm.get('area');
     if (areaControl?.hasError('required')) {
@@ -129,6 +139,13 @@ export class CreacionUsuariosComponent implements OnInit {
     }
     if (salaryControl?.hasError('pattern')) {
       return 'El salario debe ser un número decimal válido con hasta dos decimales.';
+    }
+    return null;
+  }
+  get dateOfBirthErrorMessage(): string | null {
+    const dateOfBirthControl = this.userForm.get('dateOfBirth');
+    if (dateOfBirthControl?.hasError('required')) {
+      return 'La fecha de nacimiento es obligatoria.';
     }
     return null;
   }
