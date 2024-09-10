@@ -1,1 +1,145 @@
-<p>consulta-areas works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Consulta de Áreas</h2>
+
+  <!-- Botón para crear una nueva área -->
+  <div class="mb-3 text-center">
+    <button class="btn btn-primary" (click)="openCreateForm()">
+      Crear Área
+    </button>
+  </div>
+
+  <!-- Formulario para crear/editar un área -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <form [formGroup]="areaForm" (ngSubmit)="saveArea()">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="code" class="form-label">Código</label>
+              <input
+                type="number"
+                class="form-control"
+                id="code"
+                formControlName="code"
+                placeholder="Introduce el código"
+              />
+              <div
+                *ngIf="
+                  areaForm.get('code')?.invalid && areaForm.get('code')?.touched
+                "
+                class="invalid-feedback"
+              >
+                El código es obligatorio y debe ser un número entre 10 y 99.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                placeholder="Introduce el nombre"
+                maxlength="50"
+              />
+              <div
+                *ngIf="
+                  areaForm.get('name')?.invalid && areaForm.get('name')?.touched
+                "
+                class="invalid-feedback"
+              >
+                El nombre es obligatorio y no debe exceder 50 caracteres.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="leader" class="form-label">Líder</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leader"
+                formControlName="leader"
+                placeholder="Introduce el líder"
+              />
+              <div
+                *ngIf="
+                  areaForm.get('leader')?.invalid &&
+                  areaForm.get('leader')?.touched
+                "
+                class="invalid-feedback"
+              >
+                El líder es obligatorio y debe ser un número de 7 dígitos.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="status" class="form-label">Estado</label>
+              <select id="status" class="form-control" formControlName="status">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+              <div
+                *ngIf="
+                  areaForm.get('status')?.invalid &&
+                  areaForm.get('status')?.touched
+                "
+                class="invalid-feedback"
+              >
+                El estado es obligatorio.
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-3">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="areaForm.invalid"
+            >
+              {{ isEdit ? "Actualizar" : "Guardar" }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabla para visualizar las áreas -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Líder</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let area of areas">
+        <td>{{ area.code }}</td>
+        <td>{{ area.name }}</td>
+        <td>{{ area.leader }}</td>
+        <td>{{ area.status }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="openEditForm(area)">
+            Editar
+          </button>
+          <button
+            class="btn btn-danger btn-sm ms-2"
+            (click)="deleteArea(area.id)"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
