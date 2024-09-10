@@ -1,29 +1,100 @@
-<table class="table mt-5">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <form [formGroup]="userForm">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        placeholder="Introduce tu nombre"
+        maxlength="50"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Apellido</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        formControlName="lastName"
+        placeholder="Introduce tu apellido"
+        maxlength="50"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Fecha Nacimiento</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dateOfBirth"
+        formControlName="dateOfBirth"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        maxlength="50"
+        placeholder="Introduce tu correo electrónico"
+        [ngClass]="{
+          'is-invalid':
+            userForm.get('email')?.invalid && userForm.get('email')?.touched
+        }"
+      />
+      <div
+        *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+        class="invalid-feedback"
+      >
+        {{ emailErrorMessage }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="documentNumber" class="form-label">Numero de Documento</label>
+      <input
+        type="number"
+        class="form-control"
+        id="documentNumber"
+        formControlName="documentNumber"
+        placeholder="Introduce tu documento"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="area" class="form-label">Area</label>
+      <input
+        type="number"
+        class="form-control"
+        id="area"
+        formControlName="area"
+        placeholder="Introduce el area"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="area" class="form-label">Salario</label>
+      <input
+        type="number"
+        class="form-control"
+        id="salary"
+        formControlName="salary"
+        placeholder="Introduce el salario"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="area" class="form-label">Estado</label>
+      <select name="Estado" id="" class="form-control" formControlName="status">
+        <option value="1">Activo</option>
+        <option value="0">Inactivo</option>
+      </select>
+    </div>
+  </form>
+</div>
