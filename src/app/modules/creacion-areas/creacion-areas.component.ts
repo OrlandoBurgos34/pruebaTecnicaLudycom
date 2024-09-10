@@ -15,15 +15,35 @@ export class CreacionAreasComponent implements OnInit {
     this.areaForm = this.fb.group({
       code: [
         null,
-        [Validators.required, Validators.min(10), Validators.max(99)],
+        [
+          Validators.required,
+          Validators.min(10),
+          Validators.max(99),
+          Validators.pattern(/^\d{2}$/),
+        ],
       ],
       name: ['', [Validators.required, Validators.maxLength(50)]],
       leader: [
         null,
-        [Validators.required, Validators.min(1000000), Validators.max(9999999)],
+        [
+          Validators.required,
+          Validators.min(1000000),
+          Validators.max(9999999),
+          Validators.pattern(/^\d{2}$/),
+        ],
       ],
       status: ['Activo', Validators.required],
     });
+  }
+  filterCodeInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 2);
+    this.areaForm.get('code')?.setValue(input.value);
+  }
+  filterLeaderInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 7);
+    this.areaForm.get('leader')?.setValue(input.value);
   }
 
   get codeErrorMessage(): string | null {

@@ -7,13 +7,16 @@
         <div class="mb-3">
           <label for="code" class="form-label">Código</label>
           <input
-            type="number"
+            type="text"
             class="form-control shadow-sm"
             id="code"
             formControlName="code"
             placeholder="Introduce el código"
+            maxlength="2"
+            pattern="\d{2}"
             min="10"
             max="99"
+            (input)="filterCodeInput($event)"
             [ngClass]="{
               'is-invalid':
                 areaForm.get('code')?.invalid && areaForm.get('code')?.touched
@@ -62,13 +65,16 @@
         <div class="mb-3">
           <label for="leader" class="form-label">Líder</label>
           <input
-            type="number"
+            type="text"
             class="form-control shadow-sm"
             id="leader"
             formControlName="leader"
             placeholder="Introduce el número del líder"
+            maxlength="7"
+            pattern="\d{7}"
             min="1000000"
             max="9999999"
+            (input)="filterLeaderInput($event)"
             [ngClass]="{
               'is-invalid':
                 areaForm.get('leader')?.invalid &&
