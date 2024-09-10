@@ -10,6 +10,7 @@ import { ConsultaAreasComponent } from './modules/consulta-areas/consulta-areas.
 import { ConsultaEmpleadosComponent } from './modules/consulta-empleados/consulta-empleados.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { CreacionAreasComponent } from './modules/creacion-areas/creacion-areas.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CreacionAreasComponent } from './modules/creacion-areas/creacion-areas.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()
