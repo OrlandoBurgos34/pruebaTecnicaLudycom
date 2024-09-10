@@ -1,0 +1,35 @@
+.modal-content {
+  border-radius: 8px;
+  background-color: #fefaf6;
+  color: #eadbc8;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #dac0a3;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #102c57;
+}
+
+.btn-secondary {
+  background-color: #dac0a3;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #102c57;
+}

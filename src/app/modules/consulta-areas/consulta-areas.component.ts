@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalEditarAreaComponent } from './modal-editar-area/modal-editar-area.component';
 
 @Component({
   selector: 'app-consulta-areas',
@@ -7,10 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./consulta-areas.component.css'],
 })
 export class ConsultaAreasComponent implements OnInit {
-  areas: Array<any> = []; // Arreglo de áreas (debe ser reemplazado con el tipo adecuado)
+  areas: Array<any> = [];
   areaForm!: FormGroup;
   isEdit: boolean = false;
   currentAreaId: number | null = null;
+
+  @ViewChild(ModalEditarAreaComponent)
+  modalEditarAreaComponent!: ModalEditarAreaComponent;
 
   constructor(private fb: FormBuilder) {}
 
@@ -28,24 +32,18 @@ export class ConsultaAreasComponent implements OnInit {
       status: ['Activo', Validators.required],
     });
 
-    // Cargar áreas (esto debe ser reemplazado por una llamada a la API)
     this.loadAreas();
   }
 
+  openLoginModal() {
+    this.modalEditarAreaComponent.openModal();
+  }
+
   loadAreas(): void {
-    // Aquí deberías realizar una llamada a la API para obtener las áreas.
-    // Por ejemplo: this.areaService.getAreas().subscribe(data => this.areas = data);
-    // Esto es un ejemplo con datos estáticos:
     this.areas = [
       { id: 1, code: 10, name: 'Área 1', leader: 1234567, status: 'Activo' },
       { id: 2, code: 20, name: 'Área 2', leader: 2345678, status: 'Inactivo' },
     ];
-  }
-
-  openCreateForm(): void {
-    this.isEdit = false;
-    this.currentAreaId = null;
-    this.areaForm.reset();
   }
 
   openEditForm(area: any): void {
@@ -67,8 +65,6 @@ export class ConsultaAreasComponent implements OnInit {
     const formValue = this.areaForm.value;
 
     if (this.isEdit && this.currentAreaId !== null) {
-      // Actualizar área (esto debe ser reemplazado por una llamada a la API)
-      // this.areaService.updateArea(this.currentAreaId, formValue).subscribe(() => this.loadAreas());
       const index = this.areas.findIndex(
         (area) => area.id === this.currentAreaId
       );
@@ -76,22 +72,17 @@ export class ConsultaAreasComponent implements OnInit {
         this.areas[index] = { id: this.currentAreaId, ...formValue };
       }
     } else {
-      // Crear nueva área (esto debe ser reemplazado por una llamada a la API)
-      // this.areaService.createArea(formValue).subscribe(() => this.loadAreas());
       const newId = this.areas.length
         ? Math.max(...this.areas.map((area) => area.id)) + 1
         : 1;
       this.areas.push({ id: newId, ...formValue });
     }
 
-    // Resetea el formulario después de guardar
     this.areaForm.reset();
     this.isEdit = false;
   }
 
   deleteArea(id: number): void {
-    // Eliminar área (esto debe ser reemplazado por una llamada a la API)
-    // this.areaService.deleteArea(id).subscribe(() => this.loadAreas());
     this.areas = this.areas.filter((area) => area.id !== id);
   }
 }

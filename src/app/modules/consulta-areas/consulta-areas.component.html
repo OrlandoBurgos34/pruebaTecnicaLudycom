@@ -1,14 +1,6 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4">Consulta de Áreas</h2>
 
-  <!-- Botón para crear una nueva área -->
-  <div class="mb-3 text-center">
-    <button class="btn btn-primary" (click)="openCreateForm()">
-      Crear Área
-    </button>
-  </div>
-
-  <!-- Formulario para crear/editar un área -->
   <div class="card mb-3">
     <div class="card-body">
       <form [formGroup]="areaForm" (ngSubmit)="saveArea()">
@@ -129,7 +121,7 @@
         <td>{{ area.leader }}</td>
         <td>{{ area.status }}</td>
         <td>
-          <button class="btn btn-warning btn-sm" (click)="openEditForm(area)">
+          <button class="btn btn-warning btn-sm" (click)="openLoginModal()">
             Editar
           </button>
           <button
@@ -142,4 +134,6 @@
       </tr>
     </tbody>
   </table>
+
+  <app-modal-editar-area></app-modal-editar-area>
 </div>

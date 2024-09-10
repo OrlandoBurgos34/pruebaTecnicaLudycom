@@ -1,0 +1,94 @@
+<div
+  class="modal fade"
+  id="loginModal"
+  #loginModal
+  tabindex="-1"
+  aria-labelledby="loginModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              placeholder="Introduce tu correo electrónico"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('email')?.invalid &&
+                  loginForm.get('email')?.touched
+              }"
+            />
+            <div
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              "
+              class="invalid-feedback"
+            >
+              {{ emailErrorMessage }}
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              placeholder="Introduce tu contraseña"
+              [ngClass]="{
+                'is-invalid':
+                  loginForm.get('password')?.invalid &&
+                  loginForm.get('password')?.touched
+              }"
+            />
+            <div
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+              class="invalid-feedback"
+            >
+              {{ passwordErrorMessage }}
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="loginForm.invalid"
+            >
+              Iniciar Sesión
+            </button>
+            <button type="button" class="btn btn-outline-secondary">
+              Registrar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              Cerrar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

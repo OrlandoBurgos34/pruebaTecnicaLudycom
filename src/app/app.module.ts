@@ -11,6 +11,7 @@ import { ConsultaEmpleadosComponent } from './modules/consulta-empleados/consult
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { CreacionAreasComponent } from './modules/creacion-areas/creacion-areas.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModalEditarAreaComponent } from './modules/consulta-areas/modal-editar-area/modal-editar-area.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConsultaAreasComponent,
     ConsultaEmpleadosComponent,
     DashboardComponent,
-    CreacionAreasComponent
+    CreacionAreasComponent,
+    ModalEditarAreaComponent
   ],
   imports: [
     BrowserModule,
