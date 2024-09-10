@@ -7,36 +7,44 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './modal-editar-area.component.css',
 })
 export class ModalEditarAreaComponent {
-  loginForm!: FormGroup;
+  editarAreaForm!: FormGroup;
 
-  @ViewChild('loginModal') loginModal!: ElementRef;
+  @ViewChild('areaModal') editarAreaModal!: ElementRef;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    this.editarAreaForm = this.fb.group({
+      code: [
+        null,
+        [Validators.required, Validators.min(10), Validators.max(99)],
+      ],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      leader: [
+        null,
+        [Validators.required, Validators.min(1000000), Validators.max(9999999)],
+      ],
+      status: ['Activo', Validators.required],
     });
   }
 
   openModal() {
-    if (this.loginModal) {
-      const modalElement = this.loginModal.nativeElement;
+    if (this.editarAreaModal) {
+      const modalElement = this.editarAreaModal.nativeElement;
       const modal = new (window as any).bootstrap.Modal(modalElement);
       modal.show();
     }
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Formulario enviado', this.loginForm.value);
+    if (this.editarAreaForm.valid) {
+      console.log('Formulario enviado', this.editarAreaForm.value);
     } else {
       console.log('Formulario no válido');
     }
   }
   get emailErrorMessage(): string | null {
-    const emailControl = this.loginForm.get('email');
+    const emailControl = this.editarAreaForm.get('email');
     if (emailControl?.hasError('required')) {
       return 'El correo electrónico es obligatorio.';
     }
@@ -47,7 +55,7 @@ export class ModalEditarAreaComponent {
   }
 
   get passwordErrorMessage(): string | null {
-    const passwordControl = this.loginForm.get('password');
+    const passwordControl = this.editarAreaForm.get('password');
     if (passwordControl?.hasError('required')) {
       return 'La contraseña es obligatoria.';
     }

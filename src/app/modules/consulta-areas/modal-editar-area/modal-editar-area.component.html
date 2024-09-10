@@ -1,15 +1,15 @@
 <div
   class="modal fade"
-  id="loginModal"
-  #loginModal
+  id="areaModal"
+  #areaModal
   tabindex="-1"
-  aria-labelledby="loginModalLabel"
+  aria-labelledby="areaModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-3">
       <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+        <h5 class="modal-title" id="areaModalLabel">Iniciar Sesión</h5>
         <button
           type="button"
           class="btn-close"
@@ -18,74 +18,107 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label for="email" class="form-label">Correo Electrónico</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              formControlName="email"
-              placeholder="Introduce tu correo electrónico"
-              [ngClass]="{
-                'is-invalid':
-                  loginForm.get('email')?.invalid &&
-                  loginForm.get('email')?.touched
-              }"
-            />
-            <div
-              *ngIf="
-                loginForm.get('email')?.invalid &&
-                loginForm.get('email')?.touched
-              "
-              class="invalid-feedback"
-            >
-              {{ emailErrorMessage }}
+        <form [formGroup]="editarAreaForm">
+          <div class="row g-3">
+            <div>
+              <div class="mb-3">
+                <label for="code" class="form-label">Código</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="code"
+                  formControlName="code"
+                  placeholder="Introduce el código"
+                />
+                <div
+                  *ngIf="
+                    editarAreaForm.get('code')?.invalid &&
+                    editarAreaForm.get('code')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  El código es obligatorio y debe ser un número entre 10 y 99.
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              formControlName="password"
-              placeholder="Introduce tu contraseña"
-              [ngClass]="{
-                'is-invalid':
-                  loginForm.get('password')?.invalid &&
-                  loginForm.get('password')?.touched
-              }"
-            />
-            <div
-              *ngIf="
-                loginForm.get('password')?.invalid &&
-                loginForm.get('password')?.touched
-              "
-              class="invalid-feedback"
-            >
-              {{ passwordErrorMessage }}
+
+            <div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  formControlName="name"
+                  placeholder="Introduce el nombre"
+                  maxlength="50"
+                />
+                <div
+                  *ngIf="
+                    editarAreaForm.get('name')?.invalid &&
+                    editarAreaForm.get('name')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  El nombre es obligatorio y no debe exceder 50 caracteres.
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="d-grid gap-2">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="loginForm.invalid"
-            >
-              Iniciar Sesión
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
-              Registrar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              Cerrar
-            </button>
+
+            <div>
+              <div class="mb-3">
+                <label for="leader" class="form-label">Líder</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="leader"
+                  formControlName="leader"
+                  placeholder="Introduce el líder"
+                />
+                <div
+                  *ngIf="
+                    editarAreaForm.get('leader')?.invalid &&
+                    editarAreaForm.get('leader')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  El líder es obligatorio y debe ser un número de 7 dígitos.
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Estado</label>
+                <select
+                  id="status"
+                  class="form-control"
+                  formControlName="status"
+                >
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+                <div
+                  *ngIf="
+                    editarAreaForm.get('status')?.invalid &&
+                    editarAreaForm.get('status')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  El estado es obligatorio.
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-3">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="editarAreaForm.invalid"
+              >
+                {{ false ? "Actualizar" : "Guardar" }}
+              </button>
+            </div>
           </div>
         </form>
       </div>
