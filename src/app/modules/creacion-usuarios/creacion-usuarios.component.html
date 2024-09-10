@@ -1,100 +1,217 @@
-<div class="container">
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Formulario de Creación de Usuario</h2>
   <form [formGroup]="userForm">
-    <div class="mb-3">
-      <label for="name" class="form-label">Nombre</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        formControlName="name"
-        placeholder="Introduce tu nombre"
-        maxlength="50"
-      />
-    </div>
+    <div class="row g-3">
+      <!-- Primera columna -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="name"
+            formControlName="name"
+            placeholder="Introduce tu nombre"
+            maxlength="50"
+          />
+          <div
+            *ngIf="
+              userForm.get('name')?.invalid && userForm.get('name')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ nameErrorMessage }}
+          </div>
+        </div>
+      </div>
 
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Apellido</label>
-      <input
-        type="text"
-        class="form-control"
-        id="lastName"
-        formControlName="lastName"
-        placeholder="Introduce tu apellido"
-        maxlength="50"
-      />
-    </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="lastName"
+            formControlName="lastName"
+            placeholder="Introduce tu apellido"
+            maxlength="50"
+          />
+          <div
+            *ngIf="
+              userForm.get('lastName')?.invalid &&
+              userForm.get('lastName')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ lastNameErrorMessage }}
+          </div>
+        </div>
+      </div>
 
-    <div class="mb-3">
-      <label for="dateOfBirth" class="form-label">Fecha Nacimiento</label>
-      <input
-        type="date"
-        class="form-control"
-        id="dateOfBirth"
-        formControlName="dateOfBirth"
-      />
-    </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="dateOfBirth" class="form-label">Fecha Nacimiento</label>
+          <input
+            type="date"
+            class="form-control shadow-sm"
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+          />
+          <div
+            *ngIf="
+              userForm.get('dateOfBirth')?.invalid &&
+              userForm.get('dateOfBirth')?.touched
+            "
+            class="invalid-feedback"
+          >
+            La fecha de nacimiento es obligatoria.
+          </div>
+        </div>
+      </div>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-        maxlength="50"
-        placeholder="Introduce tu correo electrónico"
-        [ngClass]="{
-          'is-invalid':
-            userForm.get('email')?.invalid && userForm.get('email')?.touched
-        }"
-      />
-      <div
-        *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
-        class="invalid-feedback"
-      >
-        {{ emailErrorMessage }}
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control shadow-sm"
+            id="email"
+            formControlName="email"
+            maxlength="50"
+            placeholder="Introduce tu correo electrónico"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('email')?.invalid && userForm.get('email')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              userForm.get('email')?.invalid && userForm.get('email')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ emailErrorMessage }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="documentNumber" class="form-label"
+            >Número de Documento</label
+          >
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="documentNumber"
+            formControlName="documentNumber"
+            placeholder="Introduce tu documento"
+            maxlength="7"
+            pattern="\d{7}"
+            inputmode="numeric"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('documentNumber')?.invalid &&
+                userForm.get('documentNumber')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              userForm.get('documentNumber')?.invalid &&
+              userForm.get('documentNumber')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ documentNumberErrorMessage }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="area" class="form-label">Área</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="area"
+            formControlName="area"
+            placeholder="Introduce el área"
+            pattern="\d{2}"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('area')?.invalid && userForm.get('area')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              userForm.get('area')?.invalid && userForm.get('area')?.touched
+            "
+            class="invalid-feedback"
+          >
+            El área debe ser un número entre 10 y 99.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salario</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="salary"
+            formControlName="salary"
+            placeholder="Introduce el salario"
+            pattern="^\d+(\.\d{2})?$"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('salary')?.invalid &&
+                userForm.get('salary')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              userForm.get('salary')?.invalid && userForm.get('salary')?.touched
+            "
+            class="invalid-feedback"
+          >
+            El salario debe ser un número decimal válido con dos decimales.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="status" class="form-label">Estado</label>
+          <select
+            id="status"
+            class="form-control shadow-sm"
+            formControlName="status"
+          >
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+          <div
+            *ngIf="
+              userForm.get('status')?.invalid && userForm.get('status')?.touched
+            "
+            class="invalid-feedback"
+          >
+            El estado es obligatorio.
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="mb-3">
-      <label for="documentNumber" class="form-label">Numero de Documento</label>
-      <input
-        type="number"
-        class="form-control"
-        id="documentNumber"
-        formControlName="documentNumber"
-        placeholder="Introduce tu documento"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="area" class="form-label">Area</label>
-      <input
-        type="number"
-        class="form-control"
-        id="area"
-        formControlName="area"
-        placeholder="Introduce el area"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="area" class="form-label">Salario</label>
-      <input
-        type="number"
-        class="form-control"
-        id="salary"
-        formControlName="salary"
-        placeholder="Introduce el salario"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="area" class="form-label">Estado</label>
-      <select name="Estado" id="" class="form-control" formControlName="status">
-        <option value="1">Activo</option>
-        <option value="0">Inactivo</option>
-      </select>
+    <!-- Botón Guardar -->
+    <div class="text-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-primary shadow-sm px-5 py-2"
+        [disabled]="userForm.invalid"
+      >
+        Guardar
+      </button>
     </div>
   </form>
 </div>
