@@ -40,15 +40,4 @@ export class CreacionUsuariosComponent implements OnInit {
     }
     return null;
   }
-
-  get passwordErrorMessage(): string | null {
-    const passwordControl = this.userForm.get('password');
-    if (passwordControl?.hasError('required')) {
-      return 'La contraseña es obligatoria.';
-    }
-    if (passwordControl?.hasError('minlength')) {
-      return 'La contraseña debe tener al menos 6 caracteres.';
-    }
-    return null;
-  }
 }
