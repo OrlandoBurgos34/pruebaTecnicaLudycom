@@ -13,6 +13,10 @@
             formControlName="name"
             placeholder="Introduce tu nombre"
             maxlength="50"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('name')?.invalid && userForm.get('name')?.touched
+            }"
           />
           <div
             *ngIf="
@@ -35,6 +39,11 @@
             formControlName="lastName"
             placeholder="Introduce tu apellido"
             maxlength="50"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('lastName')?.invalid &&
+                userForm.get('lastName')?.touched
+            }"
           />
           <div
             *ngIf="

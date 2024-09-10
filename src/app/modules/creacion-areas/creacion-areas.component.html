@@ -1,1 +1,124 @@
-<p>creacion-areas works!</p>
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Formulario de Creación de Área</h2>
+  <form [formGroup]="areaForm">
+    <div class="row g-3">
+      <!-- Código -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="code" class="form-label">Código</label>
+          <input
+            type="number"
+            class="form-control shadow-sm"
+            id="code"
+            formControlName="code"
+            placeholder="Introduce el código"
+            min="10"
+            max="99"
+            [ngClass]="{
+              'is-invalid':
+                areaForm.get('code')?.invalid && areaForm.get('code')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              areaForm.get('code')?.invalid && areaForm.get('code')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ codeErrorMessage }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Nombre -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="name"
+            formControlName="name"
+            placeholder="Introduce el nombre"
+            maxlength="50"
+            [ngClass]="{
+              'is-invalid':
+                areaForm.get('name')?.invalid && areaForm.get('name')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              areaForm.get('name')?.invalid && areaForm.get('name')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ nameErrorMessage }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Líder -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="leader" class="form-label">Líder</label>
+          <input
+            type="number"
+            class="form-control shadow-sm"
+            id="leader"
+            formControlName="leader"
+            placeholder="Introduce el número del líder"
+            min="1000000"
+            max="9999999"
+            [ngClass]="{
+              'is-invalid':
+                areaForm.get('leader')?.invalid &&
+                areaForm.get('leader')?.touched
+            }"
+          />
+          <div
+            *ngIf="
+              areaForm.get('leader')?.invalid && areaForm.get('leader')?.touched
+            "
+            class="invalid-feedback"
+          >
+            {{ leaderErrorMessage }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Estado -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="status" class="form-label">Estado</label>
+          <select
+            id="status"
+            class="form-control shadow-sm"
+            formControlName="status"
+          >
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+          <div
+            *ngIf="
+              areaForm.get('status')?.invalid && areaForm.get('status')?.touched
+            "
+            class="invalid-feedback"
+          >
+            El estado es obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Guardar -->
+    <div class="text-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-primary shadow-sm px-5 py-2"
+        [disabled]="areaForm.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
